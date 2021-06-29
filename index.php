@@ -52,6 +52,19 @@ $faqs = [
         ]
     ],
 ];
+
+function printResponses($array){
+    foreach ($array as $key => $answer) {
+        if($key == "ol_list"){
+            echo "<ol>" . $answer . "</ol>";
+        } else if ($key == "ul_list"){
+            echo "<ul>" . $answer . "</ul>";
+        }else{
+            echo "<p>" . $answer . "</p>";
+        }
+    };
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -69,53 +82,28 @@ $faqs = [
 </head>
 
 <body>
-    <p></p>
     <main>
-
         <?php
         foreach ($faqs as $faq) {
         ?>
-
             <div class="question">
-
                 <h2><?= $faq["question"]; ?></h2>
-
                 <?php
-                foreach ($faq["answer"] as $key => $answer) {
-                    if($key == "ol_list"){
+                printResponses($faq["answer"]);
                 ?>
-                    <ol><?= $answer; ?></ol>
-                <?php
-                    } else {
-                ?>
-                    <p><?= $answer; ?></p>
-                <?php
-                    }
-                };
-                ?>
-
-                <?php
+                <?php 
                 if ($faq["sub_question"]) {
                 ?>
                     <h4><?= $faq["sub_question"]; ?></h4>
-
                 <?php
-                    foreach ($faq["sub_answer"] as $sub_answer) {
-                ?>
-                        <p><?= $sub_answer; ?></p>
-                <?php
-                    };
+                    printResponses($faq["sub_answer"]);
                 };
                 ?>
-
             </div>
-
         <?php
         };
         ?>
-
     </main>
-
 </body>
 
 </html>
