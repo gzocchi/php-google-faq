@@ -23,18 +23,13 @@ $faqs = [
         "question" => "Perché il mio account è associato a un paese?",
         "answer" => [
             "Il tuo account è associato a un paese (o territorio) nei Termini di servizio per poter stabilire due cose:",
-            "<ol>
-                <li>
-                    La società consociata Google che offre i servizi, tratta le tue informazioni ed è responsabile del rispetto delle leggi sulla privacy vigenti. Generalmente Google offre i propri servizi per i consumatori tramite una delle due società seguenti:
-                        <ol type='a'>
-                            <li>Google Ireland Limited, se gli utenti sono residenti nello Spazio economico europeo (paesi dell'Unione europea, oltre a Islanda, Liechtenstein e Norvegia) o in Svizzera.</li>
-                            <li>Google LLC, con sede negli Stati Uniti, per il resto del mondo.</li>
-                        </ol> 
-                </li>
-                <li>
-                La versione dei termini che regola il nostro rapporto, che può variare in base alle leggi locali.
-                </li>
-            </ol>",
+            "ol_list" => "<li>La società consociata Google che offre i servizi, tratta le tue informazioni ed è responsabile del rispetto delle leggi sulla privacy vigenti. Generalmente Google offre i propri servizi per i consumatori tramite una delle due società seguenti:
+                <ol type='a'>
+                    <li>Google Ireland Limited, se gli utenti sono residenti nello Spazio economico europeo (paesi dell'Unione europea, oltre a Islanda, Liechtenstein e Norvegia) o in Svizzera.</li>
+                    <li>Google LLC, con sede negli Stati Uniti, per il resto del mondo.</li>
+                </ol> 
+            </li>
+            <li>La versione dei termini che regola il nostro rapporto, che può variare in base alle leggi locali.</li>",
             "Tieni presente che i servizi Google sono fondamentalmente gli stessi a prescindere dalla società consociata che li offre o dal paese a cui è associato il tuo account.",
         ],
         "sub_question" => "Stabilire il paese associato al tuo account",
@@ -66,11 +61,15 @@ $faqs = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>php-google-faq</title>
 </head>
 
 <body>
-
+    <p></p>
     <main>
 
         <?php
@@ -78,34 +77,35 @@ $faqs = [
         ?>
 
             <div class="question">
-            
+
                 <h2><?= $faq["question"]; ?></h2>
 
                 <?php
-                foreach ($faq["answer"] as $answer) {
+                foreach ($faq["answer"] as $key => $answer) {
+                    if($key == "ol_list"){
                 ?>
-
-                    <p><?= $answer; ?></p>
-
+                    <ol><?= $answer; ?></ol>
                 <?php
+                    } else {
+                ?>
+                    <p><?= $answer; ?></p>
+                <?php
+                    }
                 };
                 ?>
 
                 <?php
                 if ($faq["sub_question"]) {
                 ?>
-
                     <h4><?= $faq["sub_question"]; ?></h4>
 
-                    <?php
+                <?php
                     foreach ($faq["sub_answer"] as $sub_answer) {
-                    ?>
-
+                ?>
                         <p><?= $sub_answer; ?></p>
-
                 <?php
                     };
-                }
+                };
                 ?>
 
             </div>
